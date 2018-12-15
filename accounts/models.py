@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class MyUserManager(BaseUserManager):
-    def _create_user(self, email, password, first_name, last_name, is_admin, is_superuser, **extra_fields):
+    def _create_user(self, email, password, first_name, last_name, is_admin, **extra_fields):
         now = timezone.now()
         email = self.normalize_email(email)
         user = self.model(email=email,
@@ -14,16 +14,15 @@ class MyUserManager(BaseUserManager):
                           last_name=last_name,
                           is_admin=is_admin,
                           is_active=True,
-                          is_superuser=is_superuser,
                           last_login=now,
-                          date_joined=now, **extra_fields)
+                          date_created=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_user(self, email, first_name, last_name, password, **extra_fields):
-        return self._create_user(email, password, first_name, last_name, is_admin=False, is_superuser=False,
+    def create_user(self, email, password, first_name='', last_name='', **extra_fields):
+        return self._create_user(email, password, first_name, last_name, is_admin=False,
                                  **extra_fields)
 
 

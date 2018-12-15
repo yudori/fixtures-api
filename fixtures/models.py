@@ -5,6 +5,7 @@ from django.db import models
 class Team(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=255)
+
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_edited = models.DateTimeField(auto_now=True)
@@ -33,7 +34,10 @@ class Fixture(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     home_team = models.ForeignKey('fixtures.Team', on_delete=models.CASCADE, related_name='home_fixture')
     away_team = models.ForeignKey('fixtures.Team', on_delete=models.CASCADE, related_name='away_fixture')
+    venue = models.CharField(max_length=255, blank=True)
+    match_date = models.DateTimeField()
     status = models.IntegerField(choices=MATCH_STATUS, default=STATUS_PENDING)
+
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_edited = models.DateTimeField(auto_now=True)
 
