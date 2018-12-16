@@ -21,9 +21,8 @@ class MyUserManager(BaseUserManager):
 
         return user
 
-    def create_user(self, email, password, first_name='', last_name='', **extra_fields):
-        return self._create_user(email, password, first_name, last_name, is_admin=False,
-                                 **extra_fields)
+    def create_user(self, email, password, first_name='', last_name='', is_admin=False, **extra_fields):
+        return self._create_user(email, password, first_name, last_name, is_admin, **extra_fields)
 
 
 class User(AbstractBaseUser):

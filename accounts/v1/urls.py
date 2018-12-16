@@ -1,10 +1,10 @@
-from django.conf.urls import url, include
 from django.urls import path
+from rest_framework.authtoken import views as token_views
 
-from accounts.v1 import views as views_v1
+from accounts.v1 import views as account_views
 
 
 urlpatterns = [
-    url(r'', include('rest_framework.urls')),
-    path('register/', views_v1.RegisterVeiw.as_view(), name='register'),
+    path('login/', token_views.obtain_auth_token, name='login'),
+    path('register/', account_views.RegisterVeiw.as_view(), name='register'),
 ]
