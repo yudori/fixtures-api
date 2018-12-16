@@ -15,7 +15,13 @@ from lib.permissions import is_regular_user, is_admin_user, route_permissions
 
 
 class TeamListView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    """
+    get:
+    Return a list of all the existing teams.
 
+    post:
+    Create a new team instance.
+    """
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     authentication_classes = (TokenAuthentication,)
@@ -37,6 +43,16 @@ class TeamListView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gene
 
 class TeamDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                      mixins.DestroyModelMixin, generics.GenericAPIView):
+    """
+    get:
+    Return a specific team instance.
+
+    put:
+    Update a specific team instance.
+
+    delete:
+    Delete a specific team instance.
+    """
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     authentication_classes = (TokenAuthentication,)
@@ -60,7 +76,13 @@ class TeamDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
 
 
 class FixtureListView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    """
+    get:
+    Return a list of all the existing fixtures.
 
+    post:
+    Create a new fixture instance.
+    """
     queryset = Fixture.objects.all()
     serializer_class = FixtureSerializer
     authentication_classes = (TokenAuthentication,)
@@ -81,7 +103,16 @@ class FixtureListView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.G
 
 class FixtureDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin, generics.GenericAPIView):
+    """
+    get:
+    Return a specific fixture instance.
 
+    put:
+    Update a specific fixture instance.
+
+    delete:
+    Delete a specific fixture instance.
+    """
     queryset = Fixture.objects.all()
     serializer_class = FixtureSerializer
     authentication_classes = (TokenAuthentication,)

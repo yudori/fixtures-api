@@ -16,8 +16,11 @@ Including another URLconf
 from django.urls import include, path
 from django.contrib import admin
 
+from rest_framework.documentation import include_docs_urls
+
 
 urlpatterns = [
+    path('docs/v1/', include_docs_urls(title='Fixtures API')),
     path('v1/users/', include('accounts.v1.urls')),
     path('v1/fixtures/', include('fixtures.v1.urls')),
     path('admin/', admin.site.urls),

@@ -1,5 +1,4 @@
-from rest_framework import status
-from rest_framework.views import APIView
+from rest_framework import status, mixins, generics
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -7,13 +6,15 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from accounts.v1.serializers import RegistrationSerializer
 
 
-class RegisterVeiw(APIView):
+class RegisterVeiw( mixins.CreateModelMixin, generics.GenericAPIView):
 
-    def post(self, request, format=None):
+    serializer_class = RegistrationSerializer
+
+    def post(self, request, *args, **kwargs):
         """
         Register a new user.
         """
-        serializer = RegistrationSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)   # returns appropriate response with error status code if invalid
         user = serializer.create(serializer.validated_data)
         data = {
