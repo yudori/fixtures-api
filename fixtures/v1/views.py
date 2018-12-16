@@ -1,3 +1,7 @@
+from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 from rest_framework import status, generics, mixins, filters
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -19,6 +23,7 @@ class TeamListView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gene
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name',)
 
+    @method_decorator(cache_page(settings.DEFAULT_PAGE_CACHE_SECONDS))
     @route_permissions([is_admin_user, is_regular_user])
     def get(self, request, *args, **kwargs):
         """View all teams."""
@@ -37,6 +42,7 @@ class TeamDetailView(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    @method_decorator(cache_page(settings.DEFAULT_PAGE_CACHE_SECONDS))
     @route_permissions([is_admin_user, is_regular_user])
     def get(self, request, *args, **kwargs):
         """View specific team."""

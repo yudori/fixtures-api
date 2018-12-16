@@ -117,3 +117,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+DEFAULT_PAGE_CACHE_SECONDS = 60 * 60 * 2    # 2 HOURS
