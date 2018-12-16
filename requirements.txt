@@ -1,0 +1,3 @@
+# file needed for heroku
+
+-r requirements/prod.txt

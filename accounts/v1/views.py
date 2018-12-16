@@ -11,9 +11,7 @@ class RegisterVeiw( mixins.CreateModelMixin, generics.GenericAPIView):
     serializer_class = RegistrationSerializer
 
     def post(self, request, *args, **kwargs):
-        """
-        Register a new user.
-        """
+        """Register a new user."""
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)   # returns appropriate response with error status code if invalid
         user = serializer.create(serializer.validated_data)
@@ -27,7 +25,9 @@ class RegisterVeiw( mixins.CreateModelMixin, generics.GenericAPIView):
 
 
 class LoginView(ObtainAuthToken):
+
     def post(self, request, *args, **kwargs):
+        """Log an existing user in by returning token."""
         formatted_data = request.data.copy()
         formatted_data['username'] = request.data.get('email')
         serializer = self.serializer_class(data=formatted_data,

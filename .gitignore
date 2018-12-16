@@ -9,3 +9,5 @@ venv/
 # Environment
 .vscode/
 db.sqlite3
+
+staticfiles/
