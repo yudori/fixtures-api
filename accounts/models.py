@@ -40,6 +40,11 @@ class User(AbstractBaseUser):
 
     objects = MyUserManager()
 
+    class Meta:
+        """Extra model properties."""
+
+        ordering = ['date_created']
+
     def __str__(self):
         """
         Unicode representation for an user model.

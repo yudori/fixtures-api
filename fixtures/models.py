@@ -10,6 +10,11 @@ class Team(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_edited = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        """Extra model properties."""
+
+        ordering = ['date_created']
+
     def __str__(self):
         """
         Unicode representation for an Team model.
@@ -41,6 +46,10 @@ class Fixture(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_edited = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        """Extra model properties."""
+
+        ordering = ['date_created']
 
     def __str__(self):
         """

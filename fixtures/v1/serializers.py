@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 from fixtures.models import Fixture, Team
 
@@ -11,8 +11,8 @@ class TeamSerializer(ModelSerializer):
 
 
 class FixtureSerializer(ModelSerializer):
-    home_team = TeamSerializer(read_only=True)
-    away_team = TeamSerializer(read_only=True)
+    home_team = PrimaryKeyRelatedField(queryset=Team.objects.all(), required=True)
+    away_team = PrimaryKeyRelatedField(queryset=Team.objects.all(), required=True)
 
     class Meta:
         model = Fixture
