@@ -6,7 +6,7 @@ factory-boy==2.11.1
 Faker==1.0.1
 more-itertools==4.3.0
 pluggy==0.8.0
-py==1.7.0
+py==1.10.0
 pytest==4.0.2
 pytest-django==3.4.4
 python-dateutil==2.7.5
